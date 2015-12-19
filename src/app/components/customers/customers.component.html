@@ -20,6 +20,11 @@
                                 <span class="glyphicon glyphicon-align-justify"></span> List View
                             </a>
                         </li>
+						 <li class="toolbar-item">
+                            <a [routerLink]="['AddCustomers']" >
+                                <span class="glyphicon glyphicon-plus"></span> Add New
+                            </a>
+                        </li>
                     </ul>
                     <filter-textbox class="navbar-right"
                      (changed)="filterChanged($event)"></filter-textbox>

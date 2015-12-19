@@ -7,7 +7,7 @@ import { Sorter } from '../../utils/sorter';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { SortByDirective } from '../../directives/sortby.directive';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
-
+import {Customer} from '../../models/Customer'
 @Component({ 
   selector: 'customers', 
   providers: [DataService],
@@ -32,8 +32,9 @@ export class CustomersComponent {
     this.listDisplayModeEnabled = false;
 
     this.dataService.getCustomers()
-        .subscribe((customers:any[]) => {
-          this.customers = this.filteredCustomers = customers;
+        .subscribe((customer:Customer) => {
+          this.customers.push(customer);
+		  this.filteredCustomers.push(customer);
         });
 
     this.sorter = new Sorter();
@@ -51,7 +52,7 @@ export class CustomersComponent {
             let match = false;
             for (let prop of props) {
                 //console.log(item[prop] + ' ' + item[prop].toUpperCase().indexOf(data));
-                if (item[prop].toString().toUpperCase().indexOf(data) > -1) {
+                if (item[prop]&&item[prop].toString().toUpperCase().indexOf(data) > -1) {
                   match = true;
                   break;
                 }
@@ -67,6 +68,10 @@ export class CustomersComponent {
 
   deleteCustomer(id: number) {
 
+  }
+  
+  addCustomer(){
+     
   }
 
   sort(prop: string) {
