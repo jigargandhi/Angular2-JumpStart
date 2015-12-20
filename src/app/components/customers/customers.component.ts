@@ -10,7 +10,7 @@ import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import {Customer} from '../../models/Customer'
 @Component({ 
   selector: 'customers', 
-  providers: [DataService],
+  //providers: [DataService],
   templateUrl: 'app/components/customers/customers.component.html',
   directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective],
   pipes: [CapitalizePipe]
