@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
-import { CORE_DIRECTIVES } from 'angular2/common';
+import { CORE_DIRECTIVES, AsyncPipe } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
-//import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { DataService } from '../../services/data.service';
 import { Sorter } from '../../utils/sorter';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
@@ -23,6 +23,7 @@ export class CustomersComponent {
   customers: any[] = [];
   filteredCustomers: any[] = [];
   sorter: Sorter;
+  observable: Observable<Customer> = null;
 
   constructor(private dataService: DataService) { }
   
@@ -36,6 +37,8 @@ export class CustomersComponent {
           this.customers.push(customer);
 		  this.filteredCustomers.push(customer);
         });
+
+    this.observable = this.dataService.getCustomers();
 
     this.sorter = new Sorter();
   }
