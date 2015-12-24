@@ -7,7 +7,7 @@ import { Sorter } from '../../utils/sorter';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
 import { SortByDirective } from '../../directives/sortby.directive';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
-import {Customer} from '../../models/Customer'
+import {Customer} from '../../models/Customer';
 @Component({ 
   selector: 'customers', 
   //providers: [DataService],

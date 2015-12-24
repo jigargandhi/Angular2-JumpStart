@@ -21,7 +21,7 @@
                             </a>
                         </li>
 						 <li class="toolbar-item">
-                            <a [router-link]="['AddCustomers']" >
+                            <a [routerLink]="['AddCustomers']" >
                                 <span class="glyphicon glyphicon-plus"></span> Add New
                             </a>
                         </li>
@@ -33,11 +33,11 @@
         </div>
         <div class="container">
             <div class="row card-container" [hidden]="listDisplayModeEnabled">
-                <div class="col-sm-6 col-md-4 col-lg-3" *ngfor="#customer of dataService.getCustomers() | async">
+                <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="#customer of dataService.getCustomers() | async">
                     <div class="card">
                         <!--<button class="btn close card-close" title="Delete Customer" (click)="deleteCustomer(customer.id)">&times;</button>-->
                         <div class="card-header">
-                            <a [routerlink]="['Orders',{id:customer.id}]" class="white">
+                            <a [routerLink]="['Orders',{id:customer.id}]" class="white">
                                 {{customer.firstName | capitalize }} {{ customer.lastName | capitalize }}
                                 <i class="icon-edit icon-white editIcon"></i>
                             </a>
@@ -77,7 +77,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="#customer of filteredCustomers">
+                                <tr *NgFor="#customer of filteredCustomers">
                                     <td><img src="images/{{ customer.gender | lowercase }}.png" 
                                              class="card-image" alt="Customer Image" /></td>
                                     <td><a [routerLink]="['Orders',{id:customer.id}]">{{ customer.firstName | capitalize }}</a></td>
