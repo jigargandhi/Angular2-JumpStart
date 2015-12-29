@@ -1,7 +1,8 @@
-import { Component } from 'angular2/core';
+import { Component, ChangeDetectionStrategy} from 'angular2/core';
 import { CORE_DIRECTIVES, AsyncPipe } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
 import { Observable } from 'rxjs/Observable';
+import {Subject } from 'rxjs/Subject';
 import { DataService } from '../../services/data.service';
 import { Sorter } from '../../utils/sorter';
 import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component';
@@ -13,7 +14,8 @@ import {Customer} from '../../models/Customer';
   //providers: [DataService],
   templateUrl: 'app/components/customers/customers.component.html',
   directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective],
-  pipes: [CapitalizePipe]
+  pipes: [CapitalizePipe, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPushObserve, 
 })
 export class CustomersComponent {
 
@@ -23,7 +25,9 @@ export class CustomersComponent {
   customers: any[] = [];
   filteredCustomers: any[] = [];
   sorter: Sorter;
-  observable: Observable<Customer> = null;
+  observable: Observable<Customer>;
+  time: Subject<number>;
+      //( observer => { setInterval(_ => observer.next(new Date().getTime()), 500); });
 
   constructor(private dataService: DataService) { }
   
@@ -31,15 +35,17 @@ export class CustomersComponent {
     this.title = 'Customers';
     this.filterText = 'Filter Customers:';
     this.listDisplayModeEnabled = false;
-
+    this.observable = this.dataService.getCustomers();
+    this.time = new Subject<number>();
+    //this.observable
     this.dataService.getCustomers()
         .subscribe((customer:Customer) => {
           this.customers.push(customer);
-		  this.filteredCustomers.push(customer);
+          this.filteredCustomers.push(customer);
+          this.time.next(customer.id);
         });
 
-    this.observable = this.dataService.getCustomers();
-
+   
     this.sorter = new Sorter();
   }
 
