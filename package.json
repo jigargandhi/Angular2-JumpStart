@@ -4,7 +4,7 @@
   "version": "0.7.0",
   "scripts": {
     "tsc": "tsc --watch",
-    "start": "live-server --open=src"
+    "start": "live-server --open=src --port=8081"
   },
   "license": "ISC",
   "dependencies": {
