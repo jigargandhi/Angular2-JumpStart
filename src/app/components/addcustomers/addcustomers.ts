@@ -1,6 +1,6 @@
-import { Component, Inject } from 'angular2/core';
+import { Component, Inject,OnInit } from 'angular2/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, ControlGroup } from 'angular2/common';
-import { RouterLink,Router } from 'angular2/router';
+import { RouterLink,Router,Location } from 'angular2/router';
 import { Observable } from 'rxjs/Observable';
 import {NgForm, NgControl}    from 'angular2/common';
 import {DataService} from '../../services/data.service';
@@ -11,21 +11,29 @@ import {Customer} from '../../models/customer';
     templateUrl: 'app/components/addcustomers/addcustomers.html',
     directives: [CORE_DIRECTIVES, NgForm, FORM_DIRECTIVES]
 })
-export class AddCustomer {
+export class AddCustomer implements OnInit {
     private customerForm: ControlGroup;
-    constructor(private dataservice: DataService, @Inject(FormBuilder) private fb: FormBuilder, private router:Router) {
+    constructor(private dataservice: DataService,
+     @Inject(FormBuilder)private fb: FormBuilder, 
+     private router:Router,
+     private location:Location) {
         this.customerForm = fb.group({
-            fname: ["", Validators.required],
-            lname: ["", Validators.required],
-            gender: ["male"],
-            city: [""],
-            statename: ["", Validators.required],
-            stateabbr: ["", Validators.required],
-            orderTotal: [0, Validators.required],
-           
+            fname: ['', Validators.required],
+            lname: ['', Validators.required],
+            gender: ['male'],
+            city: [''],
+            statename: ['', Validators.required],
+            stateabbr: ['', Validators.required],
+            orderTotal: [0, Validators.required]
         });
 
     }
+
+   ngOnInit() {
+     document.title = "Add customer";
+    }
+
+
 
     onSubmit() {
         var newCust: Customer = {
@@ -45,7 +53,9 @@ export class AddCustomer {
 
 
         this.dataservice.addCustomer(newCust);
-        this.router.navigate(["Customers"]);
+        this.location.replaceState("/");
+        this.router.navigate(['Customers']);
+
     }
     addCustomer(cust: Customer) {
 

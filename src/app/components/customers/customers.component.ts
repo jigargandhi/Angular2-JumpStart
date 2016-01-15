@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy} from 'angular2/core';
+import { Component, ChangeDetectionStrategy, OnInit} from 'angular2/core';
 import { CORE_DIRECTIVES, AsyncPipe } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
 import { Observable } from 'rxjs/Observable';
@@ -17,7 +17,7 @@ import {Customer} from '../../models/Customer';
   pipes: [CapitalizePipe, AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPushObserve, 
 })
-export class CustomersComponent {
+export class CustomersComponent implements OnInit {
 
   title: string;
   filterText: string;
@@ -30,7 +30,7 @@ export class CustomersComponent {
       //( observer => { setInterval(_ => observer.next(new Date().getTime()), 500); });
 
   constructor(private dataService: DataService) { }
-  
+
   ngOnInit() {
     this.title = 'Customers';
     this.filterText = 'Filter Customers:';
@@ -44,9 +44,8 @@ export class CustomersComponent {
           this.filteredCustomers.push(customer);
           this.time.next(customer.id);
         });
-
-   
-    this.sorter = new Sorter();
+        this.sorter = new Sorter();
+        document.title = 'Angular 2 Typescript';
   }
 
   changeDisplayMode(mode: string) {
