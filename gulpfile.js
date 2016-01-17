@@ -15,7 +15,7 @@ gulp.task('clean', function () {
 
 // copy static assets - i.e. non TypeScript compiled source
 gulp.task('copy:assets', ['clean'], function () {
-    return gulp.src(['app/**/*', 'index.html', 'styles.css', '!app/**/*.ts'], { base: './' })
+    return gulp.src(['src/app/**/*', 'src/index.html', 'src/styles.css', '!src/app/**/*.ts'], { base: './src' })
       .pipe(gulp.dest('dist'))
 });
 
@@ -42,7 +42,7 @@ gulp.task('copy:libs', ['clean'], function () {
 
 
 // TypeScript compile
-gulp.task('compile', ['clean'], function () {
+gulp.task('compile1', ['clean'], function () {
     return gulp
       .src(tscConfig.files)
       .pipe(sourcemaps.init())
@@ -50,7 +50,17 @@ gulp.task('compile', ['clean'], function () {
       .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('dist/app'));
 });
-
+gulp.task('compile', ['clean'], function () {
+   var ts = typescript.createProject('tsconfig.json');
+   var tsResult = ts.src() // instead of gulp.src(...) 
+		.pipe(typescript(ts));
+    return tsResult.js
+      .pipe(typescript(ts))
+      .pipe(sourcemaps.init())
+      .pipe(typescript(tscConfig.compilerOptions))
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest('dist/app'));
+});
 // update the tsconfig files based on the glob pattern
 gulp.task('tsconfig-glob', function () {
     return tsconfig({
