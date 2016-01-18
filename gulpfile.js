@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const del = require('del');
 const typescript = require('gulp-typescript');
-const tscConfig = require('./tsconfig.json');
+//const tscConfig = require('./tsconfig.json');
 const sourcemaps = require('gulp-sourcemaps');
 //const tslint = require('gulp-tslint');
 const browserSync = require('browser-sync');
@@ -15,7 +15,11 @@ gulp.task('clean', function () {
 
 // copy static assets - i.e. non TypeScript compiled source
 gulp.task('copy:assets', ['clean'], function () {
+<<<<<<< HEAD
     return gulp.src(['src/app/**/*', 'src/index.html', 'src/styles.css', '!src/app/**/*.ts'], { base: './src' })
+=======
+    return gulp.src(['src/app/**/*', 'src/index.html', 'src/styles/*','src/images/*', '!src/app/**/*.ts'], { base: './src' })
+>>>>>>> 2f3ef14ae590ebfc04493ce9399b6f831d5bd2f6
       .pipe(gulp.dest('dist'))
 });
 
@@ -50,6 +54,7 @@ gulp.task('compile1', ['clean'], function () {
       .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('dist/app'));
 });
+<<<<<<< HEAD
 gulp.task('compile', ['clean'], function () {
    var ts = typescript.createProject('tsconfig.json');
    var tsResult = ts.src() // instead of gulp.src(...) 
@@ -61,6 +66,17 @@ gulp.task('compile', ['clean'], function () {
       .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('dist/app'));
 });
+// TypeScript compile
+gulp.task('compile', ['clean'], function () {
+    var tsProject = typescript.createProject("tsconfig.json");
+    var files = tsProject.src().pipe(typescript(tsProject));
+    return files.js      
+      .pipe(sourcemaps.init())
+     // .pipe(typescript(tscConfig.compilerOptions))
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest('dist/app'));
+});
+
 // update the tsconfig files based on the glob pattern
 gulp.task('tsconfig-glob', function () {
     return tsconfig({

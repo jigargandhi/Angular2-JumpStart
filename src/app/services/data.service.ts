@@ -11,7 +11,7 @@ export class DataService {
     constructor(private http: Http) {
         console.log("constructor called");
         if (customerData.length == 0) {
-            this.http.get('/src/customers.json')
+            this.http.get('./customers.json')
                 .map((res: Response) => res.json()).subscribe((d: Customer[]) => {
 
                     customerData = d;

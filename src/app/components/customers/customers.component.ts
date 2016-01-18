@@ -12,7 +12,7 @@ import {Customer} from '../../models/Customer';
 @Component({ 
   selector: 'customers', 
   //providers: [DataService],
-  templateUrl: 'app/components/customers/customers.component.html',
+  templateUrl: 'src/app/components/customers/customers.component.html',
   directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective],
   pipes: [CapitalizePipe, AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPushObserve, 

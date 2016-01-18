@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="/src/"></base>
+    
     <title>Angular 2 TypeScript App</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +18,8 @@
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
     <link href="styles/styles.css" rel="stylesheet" />
-	<base href="/src" />
+    <base href="/src" />
+	
 </head>
 <body>
     <header class="navbar navbar-inner navbar-fixed-top">
@@ -65,23 +66,31 @@
    <script src="https://code.angularjs.org/2.0.0-beta.0/angular2.dev.js"></script>
    <script src="https://code.angularjs.org/2.0.0-beta.0/router.dev.js"></script>-->
    
-   <script src="lib/angular2/bundles/angular2-polyfills.js"></script>
-   <script src="lib/es6-shim/es6-shim.min.js"></script>
-   <script src="lib/systemjs/dist/system.src.js"></script>
-   <script src="lib/rxjs/bundles/Rx.js"></script>
-   <script src="lib/angular2/bundles/angular2.dev.js"></script>
-   <script src="lib/angular2/bundles/router.dev.js"></script>
+ 
+   <script src="src/jspm_packages/system.js"></script>
+   <!--<script src="jspm_packages/npm/reflect-metadata@0.1.2/reflect.js"></script>-->
+   <!--<script src="jspm_packages/npm/angular2@2.0.0-beta.1/bundles/angular2-polyfills.min.js"></script>
+    <script src="jspm_packages/npm/angular2@2.0.0-beta.1/bundles/angular2-polyfills.min.js"></script>-->
+   <!--<script src="build.js"></script>-->
+   <script src="src/config.js"></script>
    
     <script>
         
-      System.config({
-        baseURL: '/lib',
-        defaultJSExtensions: true,
-        warnings: true
-      });
-      
-      System.import('./app/bootstrap')
+    //   System.config({
+    //     baseURL: '/node_modules',
+    //     defaultJSExtensions: true,
+    //     warnings: true
+    //   });
+   // System.import('es6-shim').then(function(){
+        
+        System.import('reflect-metadata').
+    then(function(){
+      System.import('app/bootstrap')
+
             .then(null, console.error.bind(console));
+            })
+    //})
+    
             
     </script>
 </body>
