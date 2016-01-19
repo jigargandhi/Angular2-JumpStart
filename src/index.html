@@ -31,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <img src="images/people.png" alt="logo">
+              <img src="src/images/people.png" alt="logo">
               <span class="app-title">Customer Manager</span>
             </div>
         </nav>
@@ -59,42 +59,19 @@
             </div>
         </div>
     </footer>
-
-   <!--<script src="https://code.angularjs.org/2.0.0-beta.0/angular2-polyfills.js"></script>
-   <script src="https://code.angularjs.org/tools/system.js"></script>
-   <script src="https://code.angularjs.org/2.0.0-beta.0/Rx.js"></script>
-   <script src="https://code.angularjs.org/2.0.0-beta.0/angular2.dev.js"></script>
-   <script src="https://code.angularjs.org/2.0.0-beta.0/router.dev.js"></script>-->
-   
-   <!--<script src="/node_modules/angular2/bundles/angular2-polyfills.js"></script>
-   <script src="/node_modules/es6-shim/es6-shim.min.js"></script>
-   <script src="jspm_packages/system.src.js"></script>
-   <script src="/node_modules/rxjs/bundles/Rx.js"></script>
-   <script src="/node_modules/angular2/bundles/angular2.dev.js"></script>
-   <script src="/node_modules/angular2/bundles/router.dev.js"></script>-->
-   
+   <script src="src/jspm_packages/npm/angular2@2.0.0-beta.1/bundles/angular2-polyfills.js"></script>  
    <script src="src/jspm_packages/system.js"></script>
-   <!--<script src="jspm_packages/npm/reflect-metadata@0.1.2/reflect.js"></script>-->
-   <!--<script src="jspm_packages/npm/angular2@2.0.0-beta.1/bundles/angular2-polyfills.min.js"></script>
-    <script src="jspm_packages/npm/angular2@2.0.0-beta.1/bundles/angular2-polyfills.min.js"></script>-->
-   <!--<script src="build.js"></script>-->
+  
    <script src="src/config.js"></script>
    
     <script>
-        
-    //   System.config({
-    //     baseURL: '/node_modules',
-    //     defaultJSExtensions: true,
-    //     warnings: true
-    //   });
-   // System.import('es6-shim').then(function(){
+    
         
         System.import('reflect-metadata').
     then(function(){
       System.import('app/bootstrap')
             .then(null, console.error.bind(console));
             })
-    //})
     
             
     </script>

@@ -9,13 +9,12 @@ import { FilterTextboxComponent } from '../filterTextbox/filterTextbox.component
 import { SortByDirective } from '../../directives/sortby.directive';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import {Customer} from '../../models/Customer';
-@Component({ 
+@Component({
   selector: 'customers', 
   //providers: [DataService],
   templateUrl: 'src/app/components/customers/customers.component.html',
   directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective],
-  pipes: [CapitalizePipe, AsyncPipe],
-  changeDetection: ChangeDetectionStrategy.OnPushObserve, 
+  pipes: [CapitalizePipe, AsyncPipe]
 })
 export class CustomersComponent implements OnInit {
 
@@ -29,23 +28,24 @@ export class CustomersComponent implements OnInit {
   time: Subject<number>;
       //( observer => { setInterval(_ => observer.next(new Date().getTime()), 500); });
 
-  constructor(private dataService: DataService) { }
-
-  ngOnInit() {
+  constructor(private dataService: DataService) {
     this.title = 'Customers';
     this.filterText = 'Filter Customers:';
     this.listDisplayModeEnabled = false;
     this.observable = this.dataService.getCustomers();
     this.time = new Subject<number>();
-    //this.observable
+    // this.observable
     this.dataService.getCustomers()
-        .subscribe((customer:Customer) => {
+        .subscribe((customer: Customer) => {
           this.customers.push(customer);
           this.filteredCustomers.push(customer);
           this.time.next(customer.id);
         });
-        this.sorter = new Sorter();
-        document.title = 'Angular 2 Typescript';
+    this.sorter = new Sorter();
+    document.title = 'Angular 2 Typescript';
+  }
+
+  ngOnInit() {
   }
 
   changeDisplayMode(mode: string) {
@@ -68,8 +68,7 @@ export class CustomersComponent implements OnInit {
             return match;
         });
         this.filteredCustomers = filtered;
-    }
-    else {
+    } else {
       this.filteredCustomers = this.customers;
     }
   }

@@ -11,7 +11,7 @@ export class DataService {
     constructor(private http: Http) {
         console.log("constructor called");
         if (customerData.length == 0) {
-            this.http.get('./customers.json')
+            this.http.get('./src/customers.json')
                 .map((res: Response) => res.json()).subscribe((d: Customer[]) => {
 
                     customerData = d;
@@ -26,7 +26,6 @@ export class DataService {
     }
 
     ngOnInit() {
-
     }
     getCustomers() {
         return data;
